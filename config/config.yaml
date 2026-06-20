@@ -18,4 +18,3 @@ tools:
 # Output.
 output:
   dir: data/cases
-  hash_algo: sha256

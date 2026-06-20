@@ -12,10 +12,10 @@ Foundations first; prove one vertical slice before adding breadth.
 
 - [x] `extractors/base.py` — Extractor ABC
 - [x] `extractors/exiftool.py` — `exiftool -j -G` → Findings
-- [ ] `core/dispatcher.py` — MIME detect → route
-- [ ] `registry.py` — register extractors
-- [ ] `report/json_report.py` — serialize Artifact
-- [ ] `cli.py` — `scry scan <image>`
+- [x] `core/dispatcher.py` — MIME detect → route
+- [x] `registry.py` — register extractors
+- [x] `report/json_report.py` — serialize Artifact
+- [x] `cli.py` — `scry scan <image>`
 
 ## 3. Breadth
 

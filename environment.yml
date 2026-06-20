@@ -6,6 +6,7 @@ dependencies:
     - python-magic   # MIME/magic detection for the dispatcher
     - pytest
     - pip
+    - pyyaml
 
     - pip:
        - python-dotenv
