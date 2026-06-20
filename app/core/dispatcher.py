@@ -1,5 +1,8 @@
-"""File-type routing.
+"""Extractor routing.
 
-Detect a file's MIME/magic type, then ask the registry which extractors
-declare they handle it and run those. Aggregates results into one Artifact.
+Takes the base Artifact produced by integrity.ingest (mime already detected)
+and routes it: asks the registry which extractors handle artifact.mime, runs
+the available ones on artifact.path, and appends their findings + provenance
+back into the same Artifact. Skips unavailable tools and isolates failures
+(per-extractor errors go into Artifact.errors). Does no file detection itself.
 """

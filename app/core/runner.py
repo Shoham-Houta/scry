@@ -39,7 +39,9 @@ def run(argv: list[str], *, timeout: float) -> RunResult:
         # child already killed by subprocess, e holds whatever was captured
         return_code = -1
         stdout = e.stdout
-        stderr = _as_text(e.stderr) + f"\nscry timed out after {timeout}s"
+        note = f"scry timed out after {timeout}s"
+        captured = _as_text(e.stderr)
+        stderr = f"{captured}\n{note}" if captured else note
     except (FileNotFoundError, PermissionError) as e:
         return_code = -2
         stdout = ""

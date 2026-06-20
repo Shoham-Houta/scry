@@ -22,6 +22,7 @@ class Category(StrEnum):
     DEVICE = auto()
     AUTHOR = auto()
     INDICATOR = auto()
+    OTHER = auto()
 
 @dataclass(frozen=True)
 class Finding:

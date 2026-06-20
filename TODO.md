@@ -5,13 +5,13 @@ Foundations first; prove one vertical slice before adding breadth.
 ## 1. Foundations
 
 - [x] `core/evidence.py` — Provenance / Artifact / Finding dataclasses
-- [ ] `core/runner.py` — safe subprocess (no shell, timeout, capture, exit code)
-- [ ] `core/integrity.py` — sha256 ingest, read-only guard, audit log
+- [x] `core/runner.py` — safe subprocess (no shell, timeout, capture, exit code)
+- [x] `core/integrity.py` — sha256 ingest, read-only guard, audit log
 
 ## 2. Vertical slice (images, end-to-end)
 
-- [ ] `extractors/base.py` — Extractor ABC
-- [ ] `extractors/exiftool.py` — `exiftool -j -G` → Findings
+- [x] `extractors/base.py` — Extractor ABC
+- [x] `extractors/exiftool.py` — `exiftool -j -G` → Findings
 - [ ] `core/dispatcher.py` — MIME detect → route
 - [ ] `registry.py` — register extractors
 - [ ] `report/json_report.py` — serialize Artifact
