@@ -6,9 +6,11 @@ dispatcher can look them up by file type / applicability.
 
 from app.extractors.base import Extractor
 from app.extractors.exiftool import ExiftoolExtractor
+from app.extractors.pdfinfo import PDFInfoExtractor
 
 _EXTRACTORS: list[Extractor] = [
     ExiftoolExtractor(),
+    PDFInfoExtractor(),
 ]
 
 

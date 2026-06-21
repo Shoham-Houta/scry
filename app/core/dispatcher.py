@@ -11,13 +11,13 @@ from app.core.evidence import Artifact
 from app.registry import extractors_for
 
 
-def dispatch(artifact: Artifact) -> Artifact:
+def dispatch(artifact: Artifact, timeout: float = 10) -> Artifact:
     for extractor in extractors_for(artifact.mime):
         if not extractor.available():
             artifact.errors.append(f"{extractor.name}: tool is not available")
             continue
         try:
-            findings, provenance = extractor.extract(artifact.path)
+            findings, provenance = extractor.extract(artifact.path, timeout)
             artifact.findings.extend(findings)
             artifact.provenance.append(provenance)
         except Exception as e:

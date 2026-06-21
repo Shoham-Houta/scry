@@ -31,7 +31,7 @@ def resolve_case_name(case_name: str | None) -> str:
     return case_name
 
 
-def scan(paths: list[Path], case_dir: Path) -> list[Artifact]:
+def scan(paths: list[Path], case_dir: Path, timeout: float) -> list[Artifact]:
     artifacts = []
     for path in paths:
         try:
@@ -40,7 +40,7 @@ def scan(paths: list[Path], case_dir: Path) -> list[Artifact]:
             audit(case_dir, "ingest_failed", path=str(path), error=str(e))
             print(f"Skip {path}: {e}")
             continue
-        artifacts.append(dispatch(artifact))
+        artifacts.append(dispatch(artifact, timeout))
     return artifacts
 
 
@@ -61,7 +61,7 @@ def main():
     case_dir = (base / case).resolve()
     case_dir.mkdir(parents=True, exist_ok=True)
 
-    artifacts = scan(args.paths, case_dir)
+    artifacts = scan(args.paths, case_dir, cfg["timeout"])
     write_report(artifacts, case_dir / args.output, case)
     print(f"scanned {len(artifacts)} file(s) → {case_dir / args.output}")
 

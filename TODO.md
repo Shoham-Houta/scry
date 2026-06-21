@@ -19,7 +19,7 @@ Foundations first; prove one vertical slice before adding breadth.
 
 ## 3. Breadth
 
-- [ ] `extractors/pdf.py` — pdfinfo + pdftotext (graceful if poppler missing)
+- [x] `extractors/pdf.py` — pdfinfo + pdftotext (graceful if poppler missing)
 
 ## 4. Enrichment (offline)
 

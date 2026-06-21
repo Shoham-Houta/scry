@@ -22,6 +22,7 @@ class Category(StrEnum):
     DEVICE = auto()
     AUTHOR = auto()
     INDICATOR = auto()
+    LEAD = auto()
     OTHER = auto()
 
 

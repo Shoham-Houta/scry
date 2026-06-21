@@ -2,18 +2,15 @@
 
 # Network is OFF by default — v1 is offline forensics only.
 network_enabled: false
-
+timeout: 30
 # Per-tool execution settings.
 tools:
   exiftool:
     path: exiftool          # resolved on PATH if not absolute
-    timeout: 30             # seconds
   pdfinfo:
     path: pdfinfo
-    timeout: 30
   pdftotext:
     path: pdftotext
-    timeout: 30
 
 # Output.
 output:

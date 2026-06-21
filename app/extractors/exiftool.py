@@ -4,9 +4,8 @@ Runs `exiftool -j -G` (JSON output, grouped tags) and maps fields into
 Findings. Handles image MIME types. GPS tags feed the geo enricher.
 """
 import json
-import pprint
 from pathlib import Path
-from app.core.evidence import Finding, Provenance,Category
+from app.core.evidence import Finding, Provenance, Category
 from app.extractors.base import Extractor
 from app.core.runner import run
 from shutil import which
@@ -21,10 +20,9 @@ class ExiftoolExtractor(Extractor):
     def available(self) -> bool:
         return which("exiftool") is not None
 
-    def extract(self, path: Path) -> tuple[list[Finding], Provenance]:
-        result = run(["exiftool", "-j", "-G", str(path)], timeout=10)
-        # print(result.stdout)
-        findings,version = self._parse(result.stdout)
+    def extract(self, path: Path, timeout: float = 10) -> tuple[list[Finding], Provenance]:
+        result = run(["exiftool", "-j", "-G", str(path)], timeout=timeout)
+        findings, version = self._parse(result.stdout)
         provenance = Provenance(
             tool=self.name,
             version=version,
@@ -54,7 +52,7 @@ class ExiftoolExtractor(Extractor):
                 category=self._categorizer(tag),
                 confidence=1.0
             ))
-        return  findings, version
+        return findings, version
 
     def _categorizer(self, tag: str) -> Category:
         if tag.startswith("GPS"):

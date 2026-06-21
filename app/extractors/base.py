@@ -29,6 +29,6 @@ class Extractor(ABC):
         """True if the underlying binary is installed (e.g shutil.which)."""
 
     @abstractmethod
-    def extract(self, path: Path) -> tuple[list[Finding], Provenance]:
+    def extract(self, path: Path, timeout: float = 10) -> tuple[list[Finding], Provenance]:
         """Run the tool and return its findings + provenance."""
 
