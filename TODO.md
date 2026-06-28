@@ -23,17 +23,17 @@ Foundations first; prove one vertical slice before adding breadth.
 
 ## 4. Enrichment (offline)
 
-- [ ] `enrichers/base.py` — Enricher ABC
-- [ ] `enrichers/geo.py` — EXIF GPS → decimal coords
-- [ ] `enrichers/indicators.py` — emails/URLs/IPs from text
+- [x] `enrichers/base.py` — Enricher ABC
+- [x] `enrichers/geo.py` — EXIF GPS → decimal coords
+- [x] `enrichers/indicators.py` — emails/URLs/IPs/PhoneNumber from text
 
 ## 5. Tests
 
-- [ ] fixtures: jpg with known GPS, pdf with known metadata
-- [ ] tests for runner, integrity, each extractor/enricher
+- [x] fixtures: jpg with known GPS, pdf with known metadata
+- [x] tests for runner, integrity, each extractor/enricher
 
 ## Later (out of v1 scope)
 
 - [ ] HTML report + cross-artifact timeline
 - [ ] network OSINT enrichers (whois/dns/reverse-geocode) behind config flag
-- [ ] more extractors: strings, binwalk, office docs
+- [ ] more extractors: strings, binwalk, office docs, Videos, Entities

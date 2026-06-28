@@ -8,7 +8,7 @@ back into the same Artifact. Skips unavailable tools and isolates failures
 """
 
 from app.core.evidence import Artifact
-from app.registry import extractors_for
+from app.registry import extractors_for, enrichers_for
 
 
 def dispatch(artifact: Artifact, timeout: float = 10) -> Artifact:
@@ -22,4 +22,9 @@ def dispatch(artifact: Artifact, timeout: float = 10) -> Artifact:
             artifact.provenance.append(provenance)
         except Exception as e:
             artifact.errors.append(f"{extractor.name}: {e}")
+    for enricher in enrichers_for(artifact):
+        try:
+            artifact.findings.extend(enricher.enrich(artifact))
+        except Exception as e:
+            artifact.errors.append(f"{enricher.name}: {e}")
     return artifact

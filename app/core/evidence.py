@@ -24,6 +24,7 @@ class Category(StrEnum):
     INDICATOR = auto()
     LEAD = auto()
     OTHER = auto()
+    TEXT = auto()
 
 
 @dataclass(frozen=True)

@@ -7,7 +7,7 @@ dependencies:
     - pytest
     - pip
     - pyyaml
-
+    - phonenumbers
     - pip:
        - python-dotenv
 

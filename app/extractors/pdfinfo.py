@@ -22,7 +22,8 @@ class PDFInfoExtractor(Extractor):
 
     def extract(self, path: Path, timeout: float = 10):  #-> tuple[list[Finding], Provenance]:
         result = run(["pdfinfo", str(path)], timeout=timeout)
-        findings, version = self._parse(result.stdout, timeout)
+        version = self._tool_version(timeout)
+        findings = self._parse(result.stdout, timeout)
         provenance = Provenance(
             tool=self.name,
             version=version,
@@ -33,9 +34,8 @@ class PDFInfoExtractor(Extractor):
         )
         return findings, provenance
 
-    def _parse(self, stdout: str, timeout: float = 10):  #-> tuple[list[Finding], Provenance]:
+    def _parse(self, stdout: str, timeout: float = 10) -> list[Finding]:
         findings = []
-        version = self._tool_version(timeout)
         for line in stdout.splitlines():
             if ":" not in line:
                 continue
@@ -43,7 +43,7 @@ class PDFInfoExtractor(Extractor):
             key, value = key.strip(), value.strip()
             findings.append(Finding(key, value, self.name, category=self._categorizer(key, value), confidence=1.0))
 
-        return findings, version if version else "Unknown"
+        return findings
 
     def _tool_version(self, timeout: float) -> str:
         return run(["pdfinfo", "-v"], timeout=timeout).stderr.split("\n")[0].split(" ")[-1]
