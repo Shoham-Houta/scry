@@ -4,7 +4,7 @@ __pycache__/
 .idea/
 .DS_Store
 .env
-
+CLAUDE.md
 # Case data / outputs — never commit evidence.
 data/
 !data/.gitkeep

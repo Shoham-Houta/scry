@@ -1,4 +1,4 @@
-# scry — build order
+# scry v1 — build order
 
 Foundations first; prove one vertical slice before adding breadth.
 
@@ -32,8 +32,43 @@ Foundations first; prove one vertical slice before adding breadth.
 - [x] fixtures: jpg with known GPS, pdf with known metadata
 - [x] tests for runner, integrity, each extractor/enricher
 
-## Later (out of v1 scope)
+---
 
-- [ ] HTML report + cross-artifact timeline
-- [ ] network OSINT enrichers (whois/dns/reverse-geocode) behind config flag
-- [ ] more extractors: strings, binwalk, office docs, Videos, Entities
+# scry v2 — identity & correlation
+
+Same rule as v1: prove one offline vertical slice (identity) before breadth,
+and keep network strictly opt-in (default OFF).
+
+## 6. Identity vertical slice (offline)
+
+- [ ] `extractors/pdflinks.py` — `pdftohtml -i -noframes -stdout` → recover
+  
+      embedded hyperlink URIs that `pdftotext` silently drops. Emit as
+      INDICATOR/`url`; the embedded-vs-visible distinction lives in
+      `source_tool`/provenance, NOT a new category.
+- [ ] `enrichers/username.py` — map known host → handle (linkedin.com/in/<h>,
+  
+      github.com/<h>, …) from `url` findings. Deterministic → reliability 1.0.
+      Emit LEAD/`username` (LEAD widened from "suspicious PDF feature" to
+      "actionable pivot/follow-up").
+- [ ] `enrichers/entities.py` — spaCy NER (PERSON/GPE/LOC) → names/locations.
+  
+      Inferential → reliability ≈ 0.7. New `ENTITY` category, key ∈ {name,
+      location, org}. GATED: requires taking the spaCy dependency + offline model.
+- [ ] tests for each new extractor/enricher
+
+## 7. Breadth — more extractors
+
+- [ ] strings, binwalk, office docs, videos (graceful if tool missing)
+- [ ] fixtures + tests for each
+
+## 8. Network OSINT (opt-in, default OFF)
+
+- [ ] `config.network_enabled` flag (default false) gates everything below
+- [ ] defang IOCs on report output (keep canonical/fanged value in the model so downstream enrichers can still match/query)
+- [ ] enrichers: whois, dns, reverse-geocode, url/ip reputation
+
+## 9. Reporting & correlation
+
+- [ ] HTML report
+- [ ] cross-artifact timeline (correlate findings across artifacts)
